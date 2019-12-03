@@ -23,4 +23,4 @@ Samma sak gäller om du vill köra koden, detta kräver två terminalfönster:
 
 ``` cd auth-server/authorization_code ```
 
-``` node server.js ```
+``` node app.js ```

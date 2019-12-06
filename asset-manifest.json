@@ -1,21 +1,22 @@
 {
   "files": {
-    "main.css": "/paid-colab-music/static/css/main.aaae035d.chunk.css",
-    "main.js": "/paid-colab-music/static/js/main.68c4ab80.chunk.js",
-    "main.js.map": "/paid-colab-music/static/js/main.68c4ab80.chunk.js.map",
-    "runtime-main.js": "/paid-colab-music/static/js/runtime-main.0664a89e.js",
-    "runtime-main.js.map": "/paid-colab-music/static/js/runtime-main.0664a89e.js.map",
-    "static/js/2.a12a9d42.chunk.js": "/paid-colab-music/static/js/2.a12a9d42.chunk.js",
-    "static/js/2.a12a9d42.chunk.js.map": "/paid-colab-music/static/js/2.a12a9d42.chunk.js.map",
+    "main.css": "/paid-colab-music/static/css/main.7d49530f.chunk.css",
+    "main.js": "/paid-colab-music/static/js/main.ba148a80.chunk.js",
+    "main.js.map": "/paid-colab-music/static/js/main.ba148a80.chunk.js.map",
+    "runtime-main.js": "/paid-colab-music/static/js/runtime-main.0f020566.js",
+    "runtime-main.js.map": "/paid-colab-music/static/js/runtime-main.0f020566.js.map",
+    "static/js/2.064b24b9.chunk.js": "/paid-colab-music/static/js/2.064b24b9.chunk.js",
+    "static/js/2.064b24b9.chunk.js.map": "/paid-colab-music/static/js/2.064b24b9.chunk.js.map",
     "index.html": "/paid-colab-music/index.html",
-    "precache-manifest.fc34fa9d04a05334f096572ac10505c0.js": "/paid-colab-music/precache-manifest.fc34fa9d04a05334f096572ac10505c0.js",
+    "precache-manifest.10d3cb509d27f44108ecbdbb70ad1eab.js": "/paid-colab-music/precache-manifest.10d3cb509d27f44108ecbdbb70ad1eab.js",
     "service-worker.js": "/paid-colab-music/service-worker.js",
-    "static/css/main.aaae035d.chunk.css.map": "/paid-colab-music/static/css/main.aaae035d.chunk.css.map"
+    "static/css/main.7d49530f.chunk.css.map": "/paid-colab-music/static/css/main.7d49530f.chunk.css.map",
+    "static/js/2.064b24b9.chunk.js.LICENSE": "/paid-colab-music/static/js/2.064b24b9.chunk.js.LICENSE"
   },
   "entrypoints": [
-    "static/js/runtime-main.0664a89e.js",
-    "static/js/2.a12a9d42.chunk.js",
-    "static/css/main.aaae035d.chunk.css",
-    "static/js/main.68c4ab80.chunk.js"
+    "static/js/runtime-main.0f020566.js",
+    "static/js/2.064b24b9.chunk.js",
+    "static/css/main.7d49530f.chunk.css",
+    "static/js/main.ba148a80.chunk.js"
   ]
 }

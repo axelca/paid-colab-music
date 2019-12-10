@@ -111,22 +111,58 @@ class App extends Component {
       params: update(this.state.params, { range: { $set: value / 100 } })
     });
   };
+ // Testar JS för knappar istället för slider 
+  
+//  var Counter = React.createClass({
+//     getInitialState: function(){
+//        return {
+//          count: 0
+//        }
+//     },
+//     incrementCount: function(){
+//       this.setState({
+//         count: this.state.count + 1
+//       });
+//     },
+//     decrementCount: function(){
+//       this.setState({
+//         count: this.state.count - 1
+//       });
+//     },
+//     render: function(){
+//       const baseClass = 'counter';
+//       const buttonBgState = this.state.count <= 0 ? 'bg-red' : 'bg-blue';
+//       return (
+//         <div className={`${baseClass} ${buttonBgState}`} data-foo={this.state.count}>
+//           <h1>Count: {this.state.count}</h1>
+//           <button type="button" onClick={this.incrementCount}>Increment</button>
+//           <button type="button" onClick={this.decrementCount}>Decrement</button>
+//         </div>
+//       );
+//     }
+//   });
+  
+//   React.render(<Counter/>, document.getElementById('mount-point'));
 
+  
   render() {
+    
+    const baseClass = 'counter';
+    const buttonBgState = this.state.count <= 0 ? 'bg-red' : 'bg-blue';
     return (
       <div className="App">
         <a href="http://localhost:8888"> Login to Spotify </a>
         <div className="sliders">
           <label>
             valence:
-            <PrettoSlider
+            {/* <PrettoSlider
               valueLabelDisplay="auto"
               aria-label="pretto slider"
               defaultValue={this.state.params.valence * 100}
               onChange={this.handleChangevalence}
               min={3}
               max={100}
-            />
+            /> */}
           </label>
           <label>
             Energy:
@@ -153,6 +189,11 @@ class App extends Component {
           </label>
         </div>
         <Playlists data={this.state.playlists} params={this.state.params} />
+        <div className={`${baseClass} ${buttonBgState}`} data-foo={this.state.count}>
+          <h1>Count: {this.state.count}</h1>
+          <button type="button" onClick={this.incrementCount}>Increment</button>
+          <button type="button" onClick={this.decrementCount}>Decrement</button>
+        </div>
       </div>
     );
   }

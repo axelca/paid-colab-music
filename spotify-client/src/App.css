@@ -32,7 +32,7 @@
 
 .track {
   width: 70%;
-  display: none;
+  opacity: .4;
   background: #282c34; 
   margin: 0 auto;
 }
@@ -43,7 +43,7 @@
 
 .available {
   color: black;
-  display: block;
+  opacity: 1;
 }
 
 .info {

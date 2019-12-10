@@ -1,7 +1,7 @@
 * {
   margin: 0;
   padding: 0;
-  font-family: "helvetica-neue", sans-serif;
+  font-family: "montserrat";
   background-color: #F1F3F6;
 
 }
@@ -18,9 +18,18 @@
   margin: 0 auto;
 }
 
+h1{
+  margin-top: 10%;
+}
+
+h3{
+  font-weight: 300;
+  opacity: 0.6;
+}
+
 .controls {
   width: 100%;
-  margin-top: 60%;
+  margin-top: 40%;
   height: 200px;
 }
 
@@ -73,6 +82,14 @@
   left: 738px;
   width: 211px;
   height: 211px;
+}
+
+.controls__minus:active {
+  transform: translateY(4px);
+}
+
+.controls__plus:active {
+  transform: translateY(4px);
 }
 
 .status {

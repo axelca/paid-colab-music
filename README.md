@@ -12,6 +12,14 @@ Just nu är det lite rörigt här, du kommer behöva installera paket i två map
 
 ``` npm i ```
 
+``` cd socket-server ```
+
+``` npm i ```
+
+``` cd ipad-client ```
+
+``` npm i ```
+
 
 ## Kör
 
@@ -22,5 +30,13 @@ Samma sak gäller om du vill köra koden, detta kräver två terminalfönster:
 ``` npm start ```
 
 ``` cd auth-server/authorization_code ```
+
+``` node app.js ```
+
+``` cd socket-server ```
+
+``` npm start ```
+
+``` cd ipad-client ```
 
 ``` node app.js ```

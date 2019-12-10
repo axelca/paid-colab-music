@@ -1,55 +1,26 @@
 import React, { Component, useState, useEffect } from "react";
 import SpotifyWebApi from "spotify-web-api-js";
-import { Slider } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
-import update from "immutability-helper";
+import openSocket from "socket.io-client";
 
 import "./App.css";
 
 const spotifyApi = new SpotifyWebApi();
-const PrettoSlider = withStyles({
-  root: {
-    color: "#52af77",
-    height: 8
-  },
-  thumb: {
-    height: 24,
-    width: 24,
-    backgroundColor: "#fff",
-    border: "2px solid currentColor",
-    marginTop: -8,
-    marginLeft: -12,
-    "&:focus,&:hover,&$active": {
-      boxShadow: "inherit"
-    }
-  },
-  active: {},
-  valueLabel: {
-    left: "calc(-50% + 4px)"
-  },
-  track: {
-    height: 8,
-    borderRadius: 4
-  },
-  rail: {
-    height: 8,
-    borderRadius: 4
-  }
-})(Slider);
+const socket = openSocket("https://e6e4d7de.ngrok.io");
 
 class App extends Component {
   constructor() {
     super();
     const params = this.getHashParams();
     const token = params.access_token;
+
     if (token) {
       spotifyApi.setAccessToken(token);
     }
+
     this.state = {
       loggedIn: token ? true : false,
-      nowPlaying: { name: "Not Checked", albumArt: "" },
       playlists: [],
-      params: { energy: 1, valence: 1, range: 0.1 }
+      param: 0.5
     };
   }
 
@@ -68,17 +39,6 @@ class App extends Component {
     return hashParams;
   };
 
-  getNowPlaying = () => {
-    spotifyApi.getMyCurrentPlaybackState().then(response => {
-      this.setState({
-        nowPlaying: {
-          name: response.item.name,
-          albumArt: response.item.album.images[0].url
-        }
-      });
-    });
-  };
-
   getPlaylists = () => {
     spotifyApi.getUserPlaylists({ limit: 1 }).then(
       data => {
@@ -92,23 +52,10 @@ class App extends Component {
 
   componentDidMount = () => {
     this.getPlaylists();
-  };
-
-  handleChangevalence = (event, value) => {
-    this.setState({
-      params: update(this.state.params, { valence: { $set: value / 100 } })
-    });
-  };
-
-  handleChangeEnergy = (event, value) => {
-    this.setState({
-      params: update(this.state.params, { energy: { $set: value / 100 } })
-    });
-  };
-
-  handleChangeRange = (event, value) => {
-    this.setState({
-      params: update(this.state.params, { range: { $set: value / 100 } })
+    socket.on("values from server", data => {
+      this.setState({
+        param: data
+      });
     });
   };
 
@@ -116,43 +63,8 @@ class App extends Component {
     return (
       <div className="App">
         <a href="http://localhost:8888"> Login to Spotify </a>
-        <div className="sliders">
-          <label>
-            valence:
-            <PrettoSlider
-              valueLabelDisplay="auto"
-              aria-label="pretto slider"
-              defaultValue={this.state.params.valence * 100}
-              onChange={this.handleChangevalence}
-              min={3}
-              max={100}
-            />
-          </label>
-          <label>
-            Energy:
-            <PrettoSlider
-              valueLabelDisplay="auto"
-              aria-label="pretto slider"
-              defaultValue={this.state.params.energy * 100}
-              onChange={this.handleChangeEnergy}
-              min={35}
-              max={100}
-            />
-          </label>
-          <label>
-            Range:
-            <PrettoSlider
-              valueLabelDisplay="auto"
-              aria-label="pretto slider"
-              defaultValue={this.state.params.range * 100}
-              onChange={this.handleChangeRange}
-              min={10}
-              max={100}
-              step={10}
-            />
-          </label>
-        </div>
-        <Playlists data={this.state.playlists} params={this.state.params} />
+        <div>Energy: {this.state.param}</div>
+        <Playlists data={this.state.playlists} param={this.state.param} />
       </div>
     );
   }
@@ -160,7 +72,7 @@ class App extends Component {
 
 const Playlists = props =>
   props.data.map(playlist => (
-    <Playlist key={playlist.id} playlist={playlist} params={props.params} />
+    <Playlist key={playlist.id} playlist={playlist} param={props.param} />
   ));
 
 class Playlist extends Component {
@@ -205,7 +117,7 @@ class Playlist extends Component {
                 key={i}
                 data={track}
                 playlist={playlist}
-                params={this.props.params}
+                param={this.props.param}
               />
             ))}
           </div>
@@ -250,42 +162,26 @@ class Track extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    if (
-      this.props.params.valence !== prevProps.params.valence ||
-      this.props.params.energy !== prevProps.params.energy ||
-      this.props.params.range !== prevProps.params.range
-    ) {
+    if (this.props.param !== prevProps.param) {
       this.isAvailable();
     }
   }
 
-  componentWillUnmount() {
-    //clearInterval(this.timerID);
-  }
-
   inRange = (songValue, peopleValue, range) => {
-    const min = peopleValue - range;
-    const max = peopleValue + range;
+    const min = parseFloat(peopleValue) - range;
+    const max = parseFloat(peopleValue) + range;
+
+    console.log("peopleValue: ", peopleValue);
+    console.log("range: ", range);
+    console.log("min: ", min);
+    console.log("max: ", max);
 
     return songValue >= min && songValue <= max;
   };
 
   isAvailable = () => {
-    //console.log("this.state.data.valence: ", this.state.data.valence);
-    //console.log("this.props.params.valence: ", this.props.params.valence);
-    //console.log("this.state.data.energy: ", this.state.data.energy);
-    //console.log("this.props.params.energy: ", this.props.params.energy);
-    const { valence: songvalence, energy: songEnergy } = this.state.data;
-    const {
-      valence: peoplevalence,
-      energy: peopleEnergy,
-      range
-    } = this.props.params;
-
-    if (
-      this.inRange(songvalence, peoplevalence, range) &&
-      this.inRange(songEnergy, peopleEnergy, range)
-    ) {
+    const { energy: songEnergy } = this.state.data;
+    if (this.inRange(songEnergy, this.props.param, 0.2)) {
       this.setState({
         available: true
       });
@@ -309,9 +205,7 @@ class Track extends Component {
           <img src={album.images[2].url} />
           {artists[0].name} - {name}
         </div>
-        <div className="meta">
-          Energy: {this.state.data.energy}, valence: {this.state.data.valence}
-        </div>
+        <div className="meta">Energy: {this.state.data.energy}</div>
       </div>
     );
   }

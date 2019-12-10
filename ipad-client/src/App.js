@@ -31,6 +31,7 @@ const App = () => {
   };
 
   return (
+    <div className="wrapper">
     <div className="App">
       <div className={wasClicked ? "controls wasClicked" : "controls"}>
         <button
@@ -53,6 +54,7 @@ const App = () => {
         </span>{" "}
         / 100
       </div>
+    </div>
     </div>
   );
 };

@@ -7,11 +7,12 @@ import plus from "./plus.svg";
 
 const App = () => {
   //const socket = openSocket("https://e6e4d7de.ngrok.io");
+  const socket = openSocket("http://localhost:8000");
   const [peopleValue, setPeopleValue] = useState(0.5); // sätt inte? ett initialt värde för vad användarna tycker
   const [wasClicked, setWasClicked] = useState(false);
 
   useEffect(() => {
-    //socket.emit("values to server", peopleValue);
+    socket.emit("values to server", peopleValue);
   });
 
   const handleClick = action => {

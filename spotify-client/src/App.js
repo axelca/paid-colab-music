@@ -5,7 +5,8 @@ import openSocket from "socket.io-client";
 import "./App.css";
 
 const spotifyApi = new SpotifyWebApi();
-const socket = openSocket("https://e6e4d7de.ngrok.io");
+//const socket = openSocket("https://e6e4d7de.ngrok.io");
+const socket = openSocket("http://localhost:8000");
 
 class App extends Component {
   constructor() {

@@ -1,27 +1,55 @@
 import React, { Component, useState, useEffect } from "react";
 import SpotifyWebApi from "spotify-web-api-js";
-import openSocket from "socket.io-client";
+import { Slider } from "@material-ui/core";
+import { withStyles } from "@material-ui/core/styles";
+import update from "immutability-helper";
 
 import "./App.css";
 
 const spotifyApi = new SpotifyWebApi();
-//const socket = openSocket("https://e6e4d7de.ngrok.io");
-const socket = openSocket("http://localhost:8000");
+const PrettoSlider = withStyles({
+  root: {
+    color: "#52af77",
+    height: 8
+  },
+  thumb: {
+    height: 24,
+    width: 24,
+    backgroundColor: "#fff",
+    border: "2px solid currentColor",
+    marginTop: -8,
+    marginLeft: -12,
+    "&:focus,&:hover,&$active": {
+      boxShadow: "inherit"
+    }
+  },
+  active: {},
+  valueLabel: {
+    left: "calc(-50% + 4px)"
+  },
+  track: {
+    height: 8,
+    borderRadius: 4
+  },
+  rail: {
+    height: 8,
+    borderRadius: 4
+  }
+})(Slider);
 
 class App extends Component {
   constructor() {
     super();
     const params = this.getHashParams();
     const token = params.access_token;
-
     if (token) {
       spotifyApi.setAccessToken(token);
     }
-
     this.state = {
       loggedIn: token ? true : false,
+      nowPlaying: { name: "Not Checked", albumArt: "" },
       playlists: [],
-      param: 0.5
+      params: { energy: 1, valence: 1, range: 0.1 }
     };
   }
 
@@ -40,6 +68,17 @@ class App extends Component {
     return hashParams;
   };
 
+  getNowPlaying = () => {
+    spotifyApi.getMyCurrentPlaybackState().then(response => {
+      this.setState({
+        nowPlaying: {
+          name: response.item.name,
+          albumArt: response.item.album.images[0].url
+        }
+      });
+    });
+  };
+
   getPlaylists = () => {
     spotifyApi.getUserPlaylists({ limit: 1 }).then(
       data => {
@@ -53,12 +92,28 @@ class App extends Component {
 
   componentDidMount = () => {
     this.getPlaylists();
-    socket.on("values from server", data => {
-      this.setState({
-        param: data
-      });
+  };
+
+  handleChangevalence = (event, value) => {
+    this.setState({
+      params: update(this.state.params, { valence: { $set: value / 100 } })
     });
   };
+
+  handleChangeEnergy = (event, value) => {
+    this.setState({
+      params: update(this.state.params, { energy: { $set: value / 100 } })
+    });
+  };
+
+  handleChangeRange = (event, value) => {
+    this.setState({
+      params: update(this.state.params, { range: { $set: value / 100 } })
+    });
+  };
+
+  
+
  // Testar JS för knappar istället för slider 
   
 //  var Counter = React.createClass({
@@ -94,13 +149,11 @@ class App extends Component {
 
   
   render() {
-    
     const baseClass = 'counter';
     const buttonBgState = this.state.count <= 0 ? 'bg-red' : 'bg-blue';
     return (
       <div className="App">
         <a href="http://localhost:8888"> Login to Spotify </a>
-<<<<<<< HEAD:client/src/App.js
         <div className="sliders">
           <label>
             valence:
@@ -143,10 +196,6 @@ class App extends Component {
           <button type="button" onClick={this.incrementCount}>Increment</button>
           <button type="button" onClick={this.decrementCount}>Decrement</button>
         </div>
-=======
-        <div>Energy: {this.state.param}</div>
-        <Playlists data={this.state.playlists} param={this.state.param} />
->>>>>>> f87df22f15d97fa1082155a444e56c6d47db70ec:spotify-client/src/App.js
       </div>
     );
   }
@@ -154,7 +203,7 @@ class App extends Component {
 
 const Playlists = props =>
   props.data.map(playlist => (
-    <Playlist key={playlist.id} playlist={playlist} param={props.param} />
+    <Playlist key={playlist.id} playlist={playlist} params={props.params} />
   ));
 
 class Playlist extends Component {
@@ -199,7 +248,7 @@ class Playlist extends Component {
                 key={i}
                 data={track}
                 playlist={playlist}
-                param={this.props.param}
+                params={this.props.params}
               />
             ))}
           </div>
@@ -244,26 +293,42 @@ class Track extends Component {
   };
 
   componentDidUpdate(prevProps) {
-    if (this.props.param !== prevProps.param) {
+    if (
+      this.props.params.valence !== prevProps.params.valence ||
+      this.props.params.energy !== prevProps.params.energy ||
+      this.props.params.range !== prevProps.params.range
+    ) {
       this.isAvailable();
     }
   }
 
-  inRange = (songValue, peopleValue, range) => {
-    const min = parseFloat(peopleValue) - range;
-    const max = parseFloat(peopleValue) + range;
+  componentWillUnmount() {
+    //clearInterval(this.timerID);
+  }
 
-    console.log("peopleValue: ", peopleValue);
-    console.log("range: ", range);
-    console.log("min: ", min);
-    console.log("max: ", max);
+  inRange = (songValue, peopleValue, range) => {
+    const min = peopleValue - range;
+    const max = peopleValue + range;
 
     return songValue >= min && songValue <= max;
   };
 
   isAvailable = () => {
-    const { energy: songEnergy } = this.state.data;
-    if (this.inRange(songEnergy, this.props.param, 0.2)) {
+    //console.log("this.state.data.valence: ", this.state.data.valence);
+    //console.log("this.props.params.valence: ", this.props.params.valence);
+    //console.log("this.state.data.energy: ", this.state.data.energy);
+    //console.log("this.props.params.energy: ", this.props.params.energy);
+    const { valence: songvalence, energy: songEnergy } = this.state.data;
+    const {
+      valence: peoplevalence,
+      energy: peopleEnergy,
+      range
+    } = this.props.params;
+
+    if (
+      this.inRange(songvalence, peoplevalence, range) &&
+      this.inRange(songEnergy, peopleEnergy, range)
+    ) {
       this.setState({
         available: true
       });
@@ -287,7 +352,9 @@ class Track extends Component {
           <img src={album.images[2].url} />
           {artists[0].name} - {name}
         </div>
-        <div className="meta">Energy: {this.state.data.energy}</div>
+        <div className="meta">
+          Energy: {this.state.data.energy}, valence: {this.state.data.valence}
+        </div>
       </div>
     );
   }

@@ -32,7 +32,10 @@ const App = () => {
   };
 
   return (
+    <div className="wrapper">
     <div className="App">
+      <h1>Control the mood!</h1>
+      <h3>Be a part of controlling the ambience by voting to increase or decrease the energy level</h3>
       <div className={wasClicked ? "controls wasClicked" : "controls"}>
         <button
           className="controls__control controls__minus"
@@ -54,6 +57,7 @@ const App = () => {
         </span>{" "}
         / 100
       </div>
+    </div>
     </div>
   );
 };

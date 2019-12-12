@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/paid-colab-music/precache-manifest.c028a478310d14b3ab9cda06494a489a.js"
+  "/paid-colab-music/precache-manifest.1faf35351970c5fd4f91ce27f2b3a0c8.js"
 );
 
 self.addEventListener('message', (event) => {

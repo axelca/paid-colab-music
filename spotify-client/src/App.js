@@ -1,342 +1,226 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import SpotifyWebApi from "spotify-web-api-js";
 import openSocket from "socket.io-client";
+
+import { getHashParams } from "./helpers/auth";
+import Main from "./components/Main";
+import Sidebar from "./components/Sidebar";
+import ActionBar from "./components/ActionBar";
+import LogIn from "./components/LogIn";
+import Filter from "./components/Filter";
+import Playlist from "./components/Playlist";
+import Track from "./components/Track";
+import NowPlaying from "./components/NowPlaying";
 
 import "./App.css";
 
 const spotifyApi = new SpotifyWebApi();
-//const socket = openSocket("https://e6e4d7de.ngrok.io");
-const socket = openSocket("http://localhost:8000");
+const socket = openSocket("https://aabae799.ngrok.io");
 
-class App extends Component {
-  constructor() {
-    super();
-    const params = this.getHashParams();
-    const token = params.access_token;
+const App = () => {
+  const [sortBy, setSortBy] = useState({ acs: true, value: "energy" });
+  const [activePlaylist, setActivePlaylist] = useState([]);
+  const [activePlaylistFiltered, setActivePlaylistFiltered] = useState([]);
+  const [nowPlaying, setNowPlaying] = useState({});
+  const [playedSongs, setPlayedSongs] = useState([]);
+  const [playlists, setPlaylists] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [peopleEnergy, setPeopleEnergy] = useState(0);
 
-    if (token) {
-      spotifyApi.setAccessToken(token);
-    }
+  const params = getHashParams();
+  const token = params.access_token;
 
-    this.state = {
-      loggedIn: token ? true : false,
-      playlists: [],
-      param: 0.5
-    };
-  }
+  socket.on("values from server", data => {
+    setPeopleEnergy(data);
+  });
 
-  // get access and refresh tokens from uri
-  // we will need them for making api calls, thats the thing
-  getHashParams = () => {
-    var hashParams = {};
-    var e,
-      r = /([^&;=]+)=?([^&;]*)/g,
-      q = window.location.hash.substring(1);
-    e = r.exec(q);
-    while (e) {
-      hashParams[e[1]] = decodeURIComponent(e[2]);
-      e = r.exec(q);
-    }
-    return hashParams;
-  };
-
-  getPlaylists = () => {
-    spotifyApi.getUserPlaylists({ limit: 1 }).then(
-      data => {
-        this.setState({ playlists: data.items });
-      },
-      err => {
-        console.error(err);
-      }
-    );
-  };
-
-  componentDidMount = () => {
-    this.getPlaylists();
-    socket.on("values from server", data => {
-      this.setState({
-        param: data
-      });
-    });
-  };
- // Testar JS för knappar istället för slider 
-  
-//  var Counter = React.createClass({
-//     getInitialState: function(){
-//        return {
-//          count: 0
-//        }
-//     },
-//     incrementCount: function(){
-//       this.setState({
-//         count: this.state.count + 1
-//       });
-//     },
-//     decrementCount: function(){
-//       this.setState({
-//         count: this.state.count - 1
-//       });
-//     },
-//     render: function(){
-//       const baseClass = 'counter';
-//       const buttonBgState = this.state.count <= 0 ? 'bg-red' : 'bg-blue';
-//       return (
-//         <div className={`${baseClass} ${buttonBgState}`} data-foo={this.state.count}>
-//           <h1>Count: {this.state.count}</h1>
-//           <button type="button" onClick={this.incrementCount}>Increment</button>
-//           <button type="button" onClick={this.decrementCount}>Decrement</button>
-//         </div>
-//       );
-//     }
-//   });
-  
-//   React.render(<Counter/>, document.getElementById('mount-point'));
-
-  
-  render() {
-    
-    const baseClass = 'counter';
-    const buttonBgState = this.state.count <= 0 ? 'bg-red' : 'bg-blue';
-    return (
-      <div className="App">
-        <a href="http://localhost:8888"> Login to Spotify </a>
-<<<<<<< HEAD:client/src/App.js
-        <div className="sliders">
-          <label>
-            valence:
-            {/* <PrettoSlider
-              valueLabelDisplay="auto"
-              aria-label="pretto slider"
-              defaultValue={this.state.params.valence * 100}
-              onChange={this.handleChangevalence}
-              min={3}
-              max={100}
-            /> */}
-          </label>
-          <label>
-            Energy:
-            <PrettoSlider
-              valueLabelDisplay="auto"
-              aria-label="pretto slider"
-              defaultValue={this.state.params.energy * 100}
-              onChange={this.handleChangeEnergy}
-              min={35}
-              max={100}
-            />
-          </label>
-          <label>
-            Range:
-            <PrettoSlider
-              valueLabelDisplay="auto"
-              aria-label="pretto slider"
-              defaultValue={this.state.params.range * 100}
-              onChange={this.handleChangeRange}
-              min={10}
-              max={100}
-              step={10}
-            />
-          </label>
-        </div>
-        <Playlists data={this.state.playlists} params={this.state.params} />
-        <div className={`${baseClass} ${buttonBgState}`} data-foo={this.state.count}>
-          <h1>Count: {this.state.count}</h1>
-          <button type="button" onClick={this.incrementCount}>Increment</button>
-          <button type="button" onClick={this.decrementCount}>Decrement</button>
-        </div>
-=======
-        <div>Energy: {this.state.param}</div>
-        <Playlists data={this.state.playlists} param={this.state.param} />
->>>>>>> f87df22f15d97fa1082155a444e56c6d47db70ec:spotify-client/src/App.js
-      </div>
-    );
-  }
-}
-
-const Playlists = props =>
-  props.data.map(playlist => (
-    <Playlist key={playlist.id} playlist={playlist} param={props.param} />
-  ));
-
-class Playlist extends Component {
-  constructor() {
-    super();
-    this.state = {
-      active: false,
-      tracks: []
-    };
-  }
-
-  getTracks = () => {
-    spotifyApi.getPlaylistTracks(this.props.playlist.id).then(
-      data => {
-        this.setState(prevState => ({
-          active: !prevState.active,
-          tracks: data.items
-        }));
-      },
-      err => {
-        console.error(err);
-      }
-    );
-  };
-
-  render() {
-    const { playlist } = this.props;
-    const { active, tracks } = this.state;
-
-    return (
-      <div>
-        <div
-          onClick={this.getTracks}
-          className={active ? "playlist active" : "playlist"}
-        >
-          {playlist.name}
-        </div>
-        {active && (
-          <div>
-            {tracks.map((track, i) => (
-              <Track
-                key={i}
-                data={track}
-                playlist={playlist}
-                param={this.props.param}
-              />
-            ))}
-          </div>
-        )}
-      </div>
-    );
-  }
-}
-
-class Track extends Component {
-  constructor() {
-    super();
-    this.state = {
-      available: false,
-      data: {}
-    };
-  }
-
-  handleClick = () => {
-    spotifyApi.play({
-      uris: [this.props.data.track.uri]
-    });
-    this.setState(prevState => ({
-      active: !prevState.active
-    }));
-  };
-
-  getTrackMeta = track => {
-    spotifyApi.getAudioFeaturesForTrack(track).then(
-      data => {
-        this.setState({ data: data });
-      },
-      err => {
-        console.error(err);
-      }
-    );
-  };
-
-  componentDidMount = () => {
-    this.getTrackMeta(this.props.data.track.id);
-    //this.timerID = setInterval(() => this.isAvailable(), 1000);
-  };
-
-  componentDidUpdate(prevProps) {
-    if (this.props.param !== prevProps.param) {
-      this.isAvailable();
+  if (token) {
+    spotifyApi.setAccessToken(token);
+    if (!loggedIn) {
+      setLoggedIn(true);
     }
   }
 
-  inRange = (songValue, peopleValue, range) => {
+  const filterChange = value => {
+    setSortBy(value);
+  };
+
+  const inRange = (songValue, peopleValue, range) => {
     const min = parseFloat(peopleValue) - range;
     const max = parseFloat(peopleValue) + range;
-
-    console.log("peopleValue: ", peopleValue);
-    console.log("range: ", range);
-    console.log("min: ", min);
-    console.log("max: ", max);
 
     return songValue >= min && songValue <= max;
   };
 
-  isAvailable = () => {
-    const { energy: songEnergy } = this.state.data;
-    if (this.inRange(songEnergy, this.props.param, 0.2)) {
-      this.setState({
-        available: true
-      });
-    } else {
-      this.setState({
-        available: false
-      });
-    }
-  };
-
-  render() {
-    const { name, artists, album } = this.props.data.track;
-    const { available } = this.state;
-
-    return (
-      <div
-        onClick={this.handleClick}
-        className={available ? "track available" : "track"}
-      >
-        <div className="info">
-          <img src={album.images[2].url} />
-          {artists[0].name} - {name}
-        </div>
-        <div className="meta">Energy: {this.state.data.energy}</div>
-      </div>
-    );
-  }
-}
-
-export default App;
-
-/*
-const App = () => {
-  const [activePlaylist, setActivePlaylist] = useState([]);
-  const [activeTrack, setActiveTrack] = useState({});
-  const [playlists, setPlaylists] = useState([]);
-  const [tracks, setTracks] = useState([]);
-
   const actions = (id, action) => {
     switch (action) {
-      case "SET_ACTIVE_PLAYLIST":
-        spotifyApi.getPlaylistTracks(id).then(
+      case "GET_CURRENT_TRACK":
+        spotifyApi.getMyCurrentPlayingTrack().then(
           data => {
-            setActivePlaylist(data);
+            //console.log(data);
+
+            /*
+            if (data.progress_ms >= data.item.duration_ms - 7000) {
+              const uris = activePlaylistFiltered.map(track => track.uri);
+
+              spotifyApi
+                .play({
+                  device_id: "a0f1362e5563d599e363de20c77ffc28e481c568",
+                  uris
+                })
+                .then(
+                  data => {
+                    console.log(data);
+                  },
+                  err => {
+                    console.error(err);
+                  }
+                );
+            }
+            */
+            setNowPlaying(data);
           },
           err => {
             console.error(err);
           }
         );
+        break;
 
-      case "SET_ACTIVE_TRACK":
-        setActiveTrack(id);
+      case "PLAY":
+        const uris = activePlaylistFiltered.map(track => track.uri);
 
-      case "SET_PLAYLISTS": //get them?
-        setPlaylists(id);
+        spotifyApi
+          .play({
+            device_id: "a0f1362e5563d599e363de20c77ffc28e481c568",
+            uris
+          })
+          .then(
+            data => {
+              console.log(data);
+            },
+            err => {
+              console.error(err);
+            }
+          );
+        break;
+
+      case "SET_PLAYLISTS":
+        spotifyApi.getUserPlaylists({ limit: 2 }).then(
+          data => {
+            setPlaylists(data.items);
+          },
+          err => {
+            console.error(err);
+          }
+        );
+        break;
+
+      case "SET_ACTIVE_PLAYLIST":
+        spotifyApi.getPlaylistTracks(id).then(
+          data => {
+            let newData = [];
+            const ids = data.items.map(({ track }) => track.id);
+
+            spotifyApi.getAudioFeaturesForTracks(ids).then(
+              metaData => {
+                data.items.map(({ track }, i) => {
+                  return (newData = [
+                    ...newData,
+                    {
+                      ...track,
+                      ...metaData.audio_features[i]
+                    }
+                  ]);
+                });
+                setActivePlaylist(newData);
+              },
+              err => {
+                console.log(err);
+              }
+            );
+          },
+          err => {
+            console.error(err);
+          }
+        );
+        break;
+
+      case "FILTER_PLAYLIST":
+        setActivePlaylistFiltered(
+          activePlaylist
+            .filter(track => inRange(track.energy, peopleEnergy, 0.1))
+            .filter(track => !playedSongs.includes(track.uri))
+        );
+        break;
+
+      default:
+        return;
     }
   };
 
+  useEffect(() => {
+    if (loggedIn && playlists.length < 1) {
+      actions(null, "SET_PLAYLISTS");
+    }
+  });
+
+  useEffect(() => {
+    actions(null, "FILTER_PLAYLIST");
+  }, [peopleEnergy, sortBy]);
+
+  useEffect(() => {
+    setInterval(() => {
+      actions(null, "GET_CURRENT_TRACK");
+    }, 1000);
+  }, [playedSongs]);
+
   return (
-    <>
-      <Library>
-        {playlists &&
-          playlists.map(playlist => (
-            <Playlist actions={actions} data={playlist} />
-          ))}
-      </Library>
-      {playlist && (
+    <div className="app">
+      {loggedIn ? (
         <>
-          <Playlist data={playlist} />
-          <Tracks actions={actions} data={tracks} />
+          <Sidebar>
+            <h2>Playlists</h2>
+            {playlists.length > 0 &&
+              playlists.map(playlist => (
+                <Playlist key={playlist.id} actions={actions} data={playlist} />
+              ))}
+            <h2>Current energy</h2>
+            {peopleEnergy}
+            <h2>Actions</h2>
+            <ActionBar actions={actions} />
+          </Sidebar>
+
+          <Main>
+            {activePlaylist.length > 0 && (
+              <>
+                <h2>Current playlist</h2>
+                <Filter filterChange={filterChange} sortBy={sortBy} />
+                {activePlaylist
+                  .sort((a, b) =>
+                    sortBy.acs
+                      ? a[sortBy.value] > b[sortBy.value]
+                        ? 1
+                        : -1
+                      : a[sortBy.value] < b[sortBy.value]
+                      ? 1
+                      : -1
+                  )
+                  .map(track => (
+                    <Track
+                      key={track.id}
+                      data={track}
+                      available={inRange(track.energy, peopleEnergy, 0.1)}
+                    />
+                  ))}
+              </>
+            )}
+          </Main>
         </>
+      ) : (
+        <LogIn />
       )}
-    </>
+    </div>
   );
 };
-*/
+
+export default App;

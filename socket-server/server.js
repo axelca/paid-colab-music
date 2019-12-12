@@ -6,10 +6,10 @@ let data = [];
 io.on("connection", socket => {
   socket.on("values to server", userData => {
     // send data to spotify client
-    io.sockets.emit("values from server", userData.toFixed(2));
+    io.sockets.emit("values from server", userData.toFixed(3));
 
     // merge old clicks with new, add a date stamp
-    data = [...data, { value: userData.toFixed(2), time: new Date() }];
+    data = [...data, { value: userData.toFixed(3), time: new Date() }];
 
     // write events to file
     fs.writeFile("data.json", JSON.stringify(data), err => {

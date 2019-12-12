@@ -15,7 +15,7 @@ const App = () => {
   });
 
   const handleClick = action => {
-    if (wasClicked) return;
+    //if (wasClicked) return;
 
     if (action === "add") {
       setPeopleValue(peopleValue + 0.01);
@@ -23,11 +23,13 @@ const App = () => {
       setPeopleValue(peopleValue - 0.01);
     }
 
+    /*
     setTimeout(() => {
       setWasClicked(false);
-    }, 3000);
+    }, 1000);
 
     return setWasClicked(true);
+    */
   };
 
   return (

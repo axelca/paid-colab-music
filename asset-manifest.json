@@ -1,24 +1,25 @@
 {
   "files": {
     "main.css": "/paid-colab-music/static/css/main.91f706dd.chunk.css",
-    "main.js": "/paid-colab-music/static/js/main.fe8788ff.chunk.js",
-    "main.js.map": "/paid-colab-music/static/js/main.fe8788ff.chunk.js.map",
+    "main.js": "/paid-colab-music/static/js/main.23ab8d12.chunk.js",
+    "main.js.map": "/paid-colab-music/static/js/main.23ab8d12.chunk.js.map",
     "runtime-main.js": "/paid-colab-music/static/js/runtime-main.0f020566.js",
     "runtime-main.js.map": "/paid-colab-music/static/js/runtime-main.0f020566.js.map",
-    "static/js/2.2edd5499.chunk.js": "/paid-colab-music/static/js/2.2edd5499.chunk.js",
-    "static/js/2.2edd5499.chunk.js.map": "/paid-colab-music/static/js/2.2edd5499.chunk.js.map",
+    "static/js/2.be34164e.chunk.js": "/paid-colab-music/static/js/2.be34164e.chunk.js",
+    "static/js/2.be34164e.chunk.js.map": "/paid-colab-music/static/js/2.be34164e.chunk.js.map",
     "index.html": "/paid-colab-music/index.html",
-    "precache-manifest.cb9cb6f5cd48c3222588ea221e6c875a.js": "/paid-colab-music/precache-manifest.cb9cb6f5cd48c3222588ea221e6c875a.js",
+    "precache-manifest.9942ff1efc73284ad9af3f79342490da.js": "/paid-colab-music/precache-manifest.9942ff1efc73284ad9af3f79342490da.js",
     "service-worker.js": "/paid-colab-music/service-worker.js",
     "static/css/main.91f706dd.chunk.css.map": "/paid-colab-music/static/css/main.91f706dd.chunk.css.map",
-    "static/js/2.2edd5499.chunk.js.LICENSE": "/paid-colab-music/static/js/2.2edd5499.chunk.js.LICENSE",
+    "static/js/2.be34164e.chunk.js.LICENSE": "/paid-colab-music/static/js/2.be34164e.chunk.js.LICENSE",
+    "static/media/click.mp3": "/paid-colab-music/static/media/click.56a99ebe.mp3",
     "static/media/minus.svg": "/paid-colab-music/static/media/minus.e06ee095.svg",
     "static/media/plus.svg": "/paid-colab-music/static/media/plus.7fdd4344.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.0f020566.js",
-    "static/js/2.2edd5499.chunk.js",
+    "static/js/2.be34164e.chunk.js",
     "static/css/main.91f706dd.chunk.css",
-    "static/js/main.fe8788ff.chunk.js"
+    "static/js/main.23ab8d12.chunk.js"
   ]
 }

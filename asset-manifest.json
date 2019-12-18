@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/paid-colab-music/static/css/main.91f706dd.chunk.css",
-    "main.js": "/paid-colab-music/static/js/main.ebb9938d.chunk.js",
-    "main.js.map": "/paid-colab-music/static/js/main.ebb9938d.chunk.js.map",
+    "main.css": "/paid-colab-music/static/css/main.7c367e31.chunk.css",
+    "main.js": "/paid-colab-music/static/js/main.a04dddd8.chunk.js",
+    "main.js.map": "/paid-colab-music/static/js/main.a04dddd8.chunk.js.map",
     "runtime-main.js": "/paid-colab-music/static/js/runtime-main.0f020566.js",
     "runtime-main.js.map": "/paid-colab-music/static/js/runtime-main.0f020566.js.map",
-    "static/js/2.e3534a80.chunk.js": "/paid-colab-music/static/js/2.e3534a80.chunk.js",
-    "static/js/2.e3534a80.chunk.js.map": "/paid-colab-music/static/js/2.e3534a80.chunk.js.map",
+    "static/js/2.be34164e.chunk.js": "/paid-colab-music/static/js/2.be34164e.chunk.js",
+    "static/js/2.be34164e.chunk.js.map": "/paid-colab-music/static/js/2.be34164e.chunk.js.map",
     "index.html": "/paid-colab-music/index.html",
-    "precache-manifest.0521db791e5604532c06ab77294d7b90.js": "/paid-colab-music/precache-manifest.0521db791e5604532c06ab77294d7b90.js",
+    "precache-manifest.c2a389ec3c4c94f40cf30180f688e1fb.js": "/paid-colab-music/precache-manifest.c2a389ec3c4c94f40cf30180f688e1fb.js",
     "service-worker.js": "/paid-colab-music/service-worker.js",
-    "static/css/main.91f706dd.chunk.css.map": "/paid-colab-music/static/css/main.91f706dd.chunk.css.map",
-    "static/js/2.e3534a80.chunk.js.LICENSE": "/paid-colab-music/static/js/2.e3534a80.chunk.js.LICENSE",
+    "static/css/main.7c367e31.chunk.css.map": "/paid-colab-music/static/css/main.7c367e31.chunk.css.map",
+    "static/js/2.be34164e.chunk.js.LICENSE": "/paid-colab-music/static/js/2.be34164e.chunk.js.LICENSE",
     "static/media/click2.mp3": "/paid-colab-music/static/media/click2.da292e7c.mp3",
     "static/media/minus.svg": "/paid-colab-music/static/media/minus.e06ee095.svg",
     "static/media/plus.svg": "/paid-colab-music/static/media/plus.7fdd4344.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.0f020566.js",
-    "static/js/2.e3534a80.chunk.js",
-    "static/css/main.91f706dd.chunk.css",
-    "static/js/main.ebb9938d.chunk.js"
+    "static/js/2.be34164e.chunk.js",
+    "static/css/main.7c367e31.chunk.css",
+    "static/js/main.a04dddd8.chunk.js"
   ]
 }

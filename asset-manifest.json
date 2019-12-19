@@ -1,25 +1,26 @@
 {
   "files": {
-    "main.css": "/paid-colab-music/static/css/main.a8f38029.chunk.css",
-    "main.js": "/paid-colab-music/static/js/main.a04dddd8.chunk.js",
-    "main.js.map": "/paid-colab-music/static/js/main.a04dddd8.chunk.js.map",
+    "main.css": "/paid-colab-music/static/css/main.d09ab84c.chunk.css",
+    "main.js": "/paid-colab-music/static/js/main.d706af7f.chunk.js",
+    "main.js.map": "/paid-colab-music/static/js/main.d706af7f.chunk.js.map",
     "runtime-main.js": "/paid-colab-music/static/js/runtime-main.0f020566.js",
     "runtime-main.js.map": "/paid-colab-music/static/js/runtime-main.0f020566.js.map",
-    "static/js/2.be34164e.chunk.js": "/paid-colab-music/static/js/2.be34164e.chunk.js",
-    "static/js/2.be34164e.chunk.js.map": "/paid-colab-music/static/js/2.be34164e.chunk.js.map",
+    "static/js/2.17998bfa.chunk.js": "/paid-colab-music/static/js/2.17998bfa.chunk.js",
+    "static/js/2.17998bfa.chunk.js.map": "/paid-colab-music/static/js/2.17998bfa.chunk.js.map",
     "index.html": "/paid-colab-music/index.html",
-    "precache-manifest.0c0ea28cf14124a1f6c663132cad07f2.js": "/paid-colab-music/precache-manifest.0c0ea28cf14124a1f6c663132cad07f2.js",
+    "precache-manifest.b4e1e099019f15731ddda1e1ffe03750.js": "/paid-colab-music/precache-manifest.b4e1e099019f15731ddda1e1ffe03750.js",
     "service-worker.js": "/paid-colab-music/service-worker.js",
-    "static/css/main.a8f38029.chunk.css.map": "/paid-colab-music/static/css/main.a8f38029.chunk.css.map",
-    "static/js/2.be34164e.chunk.js.LICENSE": "/paid-colab-music/static/js/2.be34164e.chunk.js.LICENSE",
+    "static/css/main.d09ab84c.chunk.css.map": "/paid-colab-music/static/css/main.d09ab84c.chunk.css.map",
+    "static/js/2.17998bfa.chunk.js.LICENSE": "/paid-colab-music/static/js/2.17998bfa.chunk.js.LICENSE",
     "static/media/click2.mp3": "/paid-colab-music/static/media/click2.da292e7c.mp3",
     "static/media/minus.svg": "/paid-colab-music/static/media/minus.e06ee095.svg",
+    "static/media/next.svg": "/paid-colab-music/static/media/next.7d82bb6e.svg",
     "static/media/plus.svg": "/paid-colab-music/static/media/plus.7fdd4344.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.0f020566.js",
-    "static/js/2.be34164e.chunk.js",
-    "static/css/main.a8f38029.chunk.css",
-    "static/js/main.a04dddd8.chunk.js"
+    "static/js/2.17998bfa.chunk.js",
+    "static/css/main.d09ab84c.chunk.css",
+    "static/js/main.d706af7f.chunk.js"
   ]
 }

@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/paid-colab-music/static/css/main.d09ab84c.chunk.css",
-    "main.js": "/paid-colab-music/static/js/main.b3de7898.chunk.js",
-    "main.js.map": "/paid-colab-music/static/js/main.b3de7898.chunk.js.map",
+    "main.css": "/paid-colab-music/static/css/main.4ea5d589.chunk.css",
+    "main.js": "/paid-colab-music/static/js/main.2672e0a4.chunk.js",
+    "main.js.map": "/paid-colab-music/static/js/main.2672e0a4.chunk.js.map",
     "runtime-main.js": "/paid-colab-music/static/js/runtime-main.0f020566.js",
     "runtime-main.js.map": "/paid-colab-music/static/js/runtime-main.0f020566.js.map",
-    "static/js/2.17998bfa.chunk.js": "/paid-colab-music/static/js/2.17998bfa.chunk.js",
-    "static/js/2.17998bfa.chunk.js.map": "/paid-colab-music/static/js/2.17998bfa.chunk.js.map",
+    "static/js/2.295d6b77.chunk.js": "/paid-colab-music/static/js/2.295d6b77.chunk.js",
+    "static/js/2.295d6b77.chunk.js.map": "/paid-colab-music/static/js/2.295d6b77.chunk.js.map",
     "index.html": "/paid-colab-music/index.html",
-    "precache-manifest.d5eb408581a21a212a729b482f5381de.js": "/paid-colab-music/precache-manifest.d5eb408581a21a212a729b482f5381de.js",
+    "precache-manifest.258b612713360ee2640376fe9acd9dcd.js": "/paid-colab-music/precache-manifest.258b612713360ee2640376fe9acd9dcd.js",
     "service-worker.js": "/paid-colab-music/service-worker.js",
-    "static/css/main.d09ab84c.chunk.css.map": "/paid-colab-music/static/css/main.d09ab84c.chunk.css.map",
-    "static/js/2.17998bfa.chunk.js.LICENSE": "/paid-colab-music/static/js/2.17998bfa.chunk.js.LICENSE",
+    "static/css/main.4ea5d589.chunk.css.map": "/paid-colab-music/static/css/main.4ea5d589.chunk.css.map",
+    "static/js/2.295d6b77.chunk.js.LICENSE": "/paid-colab-music/static/js/2.295d6b77.chunk.js.LICENSE",
     "static/media/click2.mp3": "/paid-colab-music/static/media/click2.da292e7c.mp3",
     "static/media/minus.svg": "/paid-colab-music/static/media/minus.e06ee095.svg",
     "static/media/next.svg": "/paid-colab-music/static/media/next.7d82bb6e.svg",
@@ -19,8 +19,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.0f020566.js",
-    "static/js/2.17998bfa.chunk.js",
-    "static/css/main.d09ab84c.chunk.css",
-    "static/js/main.b3de7898.chunk.js"
+    "static/js/2.295d6b77.chunk.js",
+    "static/css/main.4ea5d589.chunk.css",
+    "static/js/main.2672e0a4.chunk.js"
   ]
 }

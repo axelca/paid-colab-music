@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 
-const Filter = ({ filterChange, sortBy }) => {
+const Filter = ({ setSortBy, sortBy }) => {
   const [value, setValue] = useState(sortBy);
 
   useEffect(() => {
-    filterChange(value);
-  }, [value]);
+    setSortBy(value);
+  }, [value, setSortBy]);
 
   return (
     <div className="filter">
       <div
         className={sortBy.value === "name" ? "name active" : "name inactive"}
         name="name"
-        onClick={() => setValue({ acs: !value.acs, value: "name" })}
+        onClick={() => setValue({ order: !value.order, value: "name" })}
       >
         Name
       </div>
@@ -21,7 +21,7 @@ const Filter = ({ filterChange, sortBy }) => {
           sortBy.value === "energy" ? "energy active" : "energy inactive"
         }
         name="energy"
-        onClick={() => setValue({ acs: !value.acs, value: "energy" })}
+        onClick={() => setValue({ order: !value.order, value: "energy" })}
       >
         Energy
       </div>

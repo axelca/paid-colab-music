@@ -1,57 +1,98 @@
 import React, { useState, useEffect } from "react";
 import openSocket from "socket.io-client";
-import "./App.css";
 
-import minus from "./minus.svg";
-import plus from "./plus.svg";
+import { isEmpty } from "./helpers/functions";
+
+import "./App.css";
+import minus from "./images/minus.svg";
+import plus from "./images/plus.svg";
+import play from "./images/next.svg";
+import click from "./sounds/click2.mp3";
+
+const socket = openSocket("http://localhost:8000");
 
 const App = () => {
-  const socket = openSocket("https://aabae799.ngrok.io");
-  const [peopleValue, setPeopleValue] = useState(0.5); // sätt inte? ett initialt värde för vad användarna tycker
-  const [wasClicked, setWasClicked] = useState(false);
+  // state
+  const [peopleValue, setPeopleValue] = useState(0);
+  const [nowPlaying, setNowPlaying] = useState({});
+  const [available, setAvailable] = useState(false);
+  const [count, setCount] = useState(0);
 
-  useEffect(() => {
-    socket.emit("values to server", peopleValue);
+  // init
+  socket.on("now playing", nowPlaying => {
+    setNowPlaying(nowPlaying);
   });
 
-  const handleClick = action => {
-    //if (wasClicked) return;
+  // when peopleValue updates, send data to server
+  useEffect(() => {
+    socket.emit("new value", peopleValue);
+  }, [peopleValue]);
 
-    if (action === "add") {
+  useEffect(() => {
+    if (count > 20) setAvailable(true);
+  });
+
+  // handle double clicks
+  const handleDoubleClick = event => {
+    if (event.target.className.includes("allowDoubleClick")) return;
+    event.preventDefault();
+  };
+
+  // handle single clicks
+  const handleClick = action => {
+    setCount(count + 1);
+    playSound();
+    if (action === "add" && peopleValue < 1) {
       setPeopleValue(peopleValue + 0.01);
-    } else if (action === "subtract") {
+    } else if (action === "subtract" && peopleValue > 0.01) {
       setPeopleValue(peopleValue - 0.01);
     }
+  };
 
-    /*
-    setTimeout(() => {
-      setWasClicked(false);
-    }, 1000);
+  const handlePlay = () => {
+    setCount(0);
+    setAvailable(false);
+    socket.emit("next", true);
+  };
 
-    return setWasClicked(true);
-    */
+  // play sound when user clicks
+  const playSound = () => {
+    const audio = new Audio(click);
+    if (!audio.paused) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
   };
 
   return (
-    <div className="wrapper">
+    <div className="wrapper" onDoubleClick={handleDoubleClick}>
       <div className="App">
         <h1>Control the mood!</h1>
         <h3>
-          Be a part of controlling the ambience by voting to increase or
-          decrease the energy level
+          Be a part of controlling the ambience by increasing or decreasing the
+          energy level
         </h3>
-        <div className={wasClicked ? "controls wasClicked" : "controls"}>
+        <div className="controls">
           <button
-            className="controls__control controls__minus"
+            className="controls__control controls__minus allowDoubleClick"
             onClick={() => handleClick("subtract")}
           >
-            <img src={minus} />
+            <img
+              className="allowDoubleClick"
+              src={minus}
+              alt="decrease energy"
+            />
           </button>
           <button
-            className="controls__control controls__plus"
+            className="controls__control controls__plus allowDoubleClick"
             onClick={() => handleClick("add")}
           >
-            <img src={plus} />
+            <img
+              className="allowDoubleClick"
+              src={plus}
+              alt="increase energy"
+            />
           </button>
         </div>
         <div className="status">
@@ -62,6 +103,19 @@ const App = () => {
           / 100
         </div>
       </div>
+    </div>
+  );
+};
+
+const NowPlaying = ({ data }) => {
+  const { album, artists, name } = data;
+  return (
+    <div>
+      <div>
+        <img src={album.images[2].url} alt="album cover" />
+      </div>
+      <div>{name}</div>
+      <div>{artists[0].name}</div>
     </div>
   );
 };

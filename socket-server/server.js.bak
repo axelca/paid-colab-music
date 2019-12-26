@@ -1,0 +1,71 @@
+const io = require("socket.io")();
+const fs = require("fs");
+const port = 8000;
+let data = [];
+let sequenceNumberByClient = new Map();
+let peopleValue = 0;
+let next = false;
+
+// event fired every time a new client connects:
+io.on("connection", socket => {
+  console.info(`Client connected [id=${socket.id}]`);
+  // initialize this client's sequence number
+  sequenceNumberByClient.set(socket, 1);
+
+  socket.on("new value", userData => {
+    peopleValue = userData;
+    console.log("got: ", userData);
+    // merge old clicks with new, add a date stamp
+    data = [...data, { value: userData.toFixed(3), time: new Date() }];
+
+    // write events to file
+    fs.writeFile("data.json", JSON.stringify(data), err => {
+      if (err) throw err;
+      //console.log("Data written to file");
+    });
+  });
+
+  socket.on("next", userData => {
+    io.sockets.emit("next");
+  });
+
+  // when socket disconnects, remove it from the list:
+  socket.on("disconnect", () => {
+    sequenceNumberByClient.delete(socket);
+    console.info(`Client gone [id=${socket.id}]`);
+  });
+});
+
+// sends each client its current sequence number
+setInterval(() => {
+  for (const [client] of sequenceNumberByClient.entries()) {
+    client.emit("peopleValue", peopleValue);
+    client.emit("next", next);
+  }
+}, 1000);
+
+io.listen(port);
+console.log("listening on port ", port);
+
+/*
+socket.on("values to server", userData => {
+    console.log("got: ", userData);
+    console.log(io.sockets);
+    // send data to spotify client
+    io.sockets.emit("values from server", userData);
+
+    // merge old clicks with new, add a date stamp
+    data = [...data, { value: userData.toFixed(3), time: new Date() }];
+
+    // write events to file
+    fs.writeFile("data.json", JSON.stringify(data), err => {
+      if (err) throw err;
+      //console.log("Data written to file");
+    });
+  });
+
+  socket.on("nowPlaying", nowPlaying => {
+    console.log("nowPlaying: ", nowPlaying);
+    io.sockets.emit("nowPlaying", nowPlaying);
+  });
+*/

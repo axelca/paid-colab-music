@@ -43,12 +43,19 @@ const App = () => {
       setLoggedIn(true);
     }
   }
-  socket.on("new value", data => {
-    console.log(data);
-    setPeopleValue(data);
-  });
-  socket.once("next", peopleValue => {
-    console.log("user wants to play new track!");
+
+  // useeffect its?
+  useEffect(() => {
+    socket.on("new value", data => {
+      console.log(data);
+      setPeopleValue(data);
+    });
+    socket.once("next", peopleValue => {
+      console.log("user wants to play new track!");
+    });
+    return () => {
+      socket.off("new value");
+    };
   });
 
   // API-actions
@@ -152,8 +159,7 @@ const App = () => {
       activePlaylistData,
       activePlaylistFiltered,
       peopleValue,
-      playedSongs,
-      spotifyApi
+      playedSongs
     ]
   );
 

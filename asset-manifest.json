@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/paid-colab-music/static/css/main.fa703ec2.chunk.css",
+    "main.css": "/paid-colab-music/static/css/main.bba7af0d.chunk.css",
     "main.js": "/paid-colab-music/static/js/main.0a88ca91.chunk.js",
     "main.js.map": "/paid-colab-music/static/js/main.0a88ca91.chunk.js.map",
     "runtime-main.js": "/paid-colab-music/static/js/runtime-main.0f020566.js",
@@ -8,16 +8,16 @@
     "static/js/2.3984519b.chunk.js": "/paid-colab-music/static/js/2.3984519b.chunk.js",
     "static/js/2.3984519b.chunk.js.map": "/paid-colab-music/static/js/2.3984519b.chunk.js.map",
     "index.html": "/paid-colab-music/index.html",
-    "precache-manifest.821c0db0b061bce1acd1643754c2c34c.js": "/paid-colab-music/precache-manifest.821c0db0b061bce1acd1643754c2c34c.js",
+    "precache-manifest.3ce26e684db51210b1cb7c89def25db7.js": "/paid-colab-music/precache-manifest.3ce26e684db51210b1cb7c89def25db7.js",
     "service-worker.js": "/paid-colab-music/service-worker.js",
-    "static/css/main.fa703ec2.chunk.css.map": "/paid-colab-music/static/css/main.fa703ec2.chunk.css.map",
+    "static/css/main.bba7af0d.chunk.css.map": "/paid-colab-music/static/css/main.bba7af0d.chunk.css.map",
     "static/js/2.3984519b.chunk.js.LICENSE": "/paid-colab-music/static/js/2.3984519b.chunk.js.LICENSE",
     "static/media/thumb.svg": "/paid-colab-music/static/media/thumb.01dcf2b9.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.0f020566.js",
     "static/js/2.3984519b.chunk.js",
-    "static/css/main.fa703ec2.chunk.css",
+    "static/css/main.bba7af0d.chunk.css",
     "static/js/main.0a88ca91.chunk.js"
   ]
 }

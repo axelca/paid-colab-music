@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/paid-colab-music/static/css/main.bba7af0d.chunk.css",
-    "main.js": "/paid-colab-music/static/js/main.bc05dd81.chunk.js",
-    "main.js.map": "/paid-colab-music/static/js/main.bc05dd81.chunk.js.map",
+    "main.css": "/paid-colab-music/static/css/main.90cf95a5.chunk.css",
+    "main.js": "/paid-colab-music/static/js/main.e91b297f.chunk.js",
+    "main.js.map": "/paid-colab-music/static/js/main.e91b297f.chunk.js.map",
     "runtime-main.js": "/paid-colab-music/static/js/runtime-main.0f020566.js",
     "runtime-main.js.map": "/paid-colab-music/static/js/runtime-main.0f020566.js.map",
     "static/js/2.3984519b.chunk.js": "/paid-colab-music/static/js/2.3984519b.chunk.js",
     "static/js/2.3984519b.chunk.js.map": "/paid-colab-music/static/js/2.3984519b.chunk.js.map",
     "index.html": "/paid-colab-music/index.html",
-    "precache-manifest.dbf1b343b87db6a2425214a9fdf345df.js": "/paid-colab-music/precache-manifest.dbf1b343b87db6a2425214a9fdf345df.js",
+    "precache-manifest.15e2a7d7f675fd090d4a0782c3ed4028.js": "/paid-colab-music/precache-manifest.15e2a7d7f675fd090d4a0782c3ed4028.js",
     "service-worker.js": "/paid-colab-music/service-worker.js",
-    "static/css/main.bba7af0d.chunk.css.map": "/paid-colab-music/static/css/main.bba7af0d.chunk.css.map",
+    "static/css/main.90cf95a5.chunk.css.map": "/paid-colab-music/static/css/main.90cf95a5.chunk.css.map",
     "static/js/2.3984519b.chunk.js.LICENSE": "/paid-colab-music/static/js/2.3984519b.chunk.js.LICENSE",
     "static/media/thumb.svg": "/paid-colab-music/static/media/thumb.01dcf2b9.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.0f020566.js",
     "static/js/2.3984519b.chunk.js",
-    "static/css/main.bba7af0d.chunk.css",
-    "static/js/main.bc05dd81.chunk.js"
+    "static/css/main.90cf95a5.chunk.css",
+    "static/js/main.e91b297f.chunk.js"
   ]
 }

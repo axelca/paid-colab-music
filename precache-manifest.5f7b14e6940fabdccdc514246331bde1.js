@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "dc14411cc5f0b785c8cd77c3bccdfb67",
+    "revision": "bfb884aceae738f84757b36dd25338f6",
     "url": "/paid-colab-music/index.html"
   },
   {
-    "revision": "e60299c67f8984f50746",
-    "url": "/paid-colab-music/static/css/main.edcb35d3.chunk.css"
+    "revision": "51ca4c8780275794b55b",
+    "url": "/paid-colab-music/static/css/main.462d1099.chunk.css"
   },
   {
     "revision": "e2ad4ca3fd3c210f8b71",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/paid-colab-music/static/js/2.0ab68114.chunk.js.LICENSE"
   },
   {
-    "revision": "e60299c67f8984f50746",
-    "url": "/paid-colab-music/static/js/main.4e9777c7.chunk.js"
+    "revision": "51ca4c8780275794b55b",
+    "url": "/paid-colab-music/static/js/main.997dec20.chunk.js"
   },
   {
     "revision": "a80ff1320a41b83a370c",

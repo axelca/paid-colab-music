@@ -2,41 +2,32 @@
 
 ## Installation
 
-Just nu är det lite rörigt här, du kommer behöva installera paket i två mappar, en för servern och en för klienten:
+For now you need to install dependecies in all sub folders, you need the spotify-client who recieves data, the ipad-client who sends data, the socket-server who transmits the data and the auth-server for authorizing towards Spotify.
 
-``` cd client ```
+`cd spotify-client`
 
-``` npm i ```
+`npm i`
 
-``` cd auth-server ```
+`cd ipad-client`
 
-``` npm i ```
+`npm i`
 
-``` cd socket-server ```
+`cd socket-server`
 
-``` npm i ```
+`npm i`
 
-``` cd ipad-client ```
+`cd auth-server`
 
-``` npm i ```
+`npm i`
 
+## Running
 
-## Kör
+Running the code is done with either:
 
-Samma sak gäller om du vill köra koden, detta kräver två terminalfönster:
+`npm start`
 
-``` cd client ```
+or:
 
-``` npm start ```
+`node app.js`
 
-``` cd auth-server/authorization_code ```
-
-``` node app.js ```
-
-``` cd socket-server ```
-
-``` npm start ```
-
-``` cd ipad-client ```
-
-``` node app.js ```
+It depends on if there´s pre defined scripts in each folder, sorry it has been a stressful project so far.

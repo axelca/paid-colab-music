@@ -86,7 +86,7 @@ const App = () => {
 
           spotifyApi
             .play({
-              device_id: "a0f1362e5563d599e363de20c77ffc28e481c568",
+              //device_id: "",
               uris
             })
             .then(
@@ -193,13 +193,6 @@ const App = () => {
     actions(null, "FILTER_PLAYLIST");
     //eslint-disable-next-line
   }, [peopleValue, sortBy]);
-
-  // If nowPlaying changes, send updates to server
-  /*
-  useEffect(() => {
-    socket.emit("nowPlaying", nowPlaying);
-  }, [socket, nowPlaying]);
-  */
 
   return (
     <div className="app">
